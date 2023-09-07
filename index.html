@@ -1,237 +1,22 @@
-<html><head><style id="st_globalStyles">
-  body[mode='comments'] * {
-    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00LjkxNjQ4IDIzLjQxMDlDNS40OTE1MyAyMi45ODg3IDUuOTMxNzkgMjIuMzkzNSA2LjIzMjggMjEuNjQwN0M0Ljc5MDY5IDE5LjczODMgNCAxNy4zOTMzIDQgMTQuOTk3NUM0IDguOTM0MSA4LjkzMjgyIDQgMTUuMDAyMiA0QzIxLjA3MTcgNCAyNiA4LjkzOTE5IDI2IDE1LjAwMjVDMjYgMjEuMDY1OSAyMS4wNjcyIDI2IDE0Ljk5NzggMjZDMTIuOTg5NiAyNiAxMS4wMzUzIDI1LjQ1NTcgOS4zMjM2NyAyNC40MjMxQzguNDI5NjUgMjQuOTU3MiA3LjQxNDM0IDI1LjIyNjggNi4zMDAxOCAyNS4yMjY4QzUuOTU0MjYgMjUuMjI2OCA1LjU5OTM1IDI1LjIwMTQgNS4yNTM0MiAyNS4xNDU0QzQuOTAzIDI1LjA4OTUgNC42Mjg5NiAyNC44MDQ2IDQuNTUyNTggMjQuNDE4QzQuNDc2MjEgMjQuMDI2NCA0LjYxOTk3IDIzLjYyOTYgNC45MTY0OCAyMy40MTA5WiIgZmlsbD0iI0ZGNjI1MCIvPgo8L3N2Zz4K')
-        0 24,
-      auto !important;
-  }
-  
-  body[mode='code'] [data-id]:not(.hidden) {
-    cursor: default;
-  }
-  
-  /* default node state */
-  
-  body[mode='code'] [data-id]:not(.hidden), body[mode='comments'] [data-id]:not(.hidden) {
-    pointer-events: all;
-  }
-  
-  /* is_image */
-  
-  body[mode='code'] [data-id].is_image [data-id], body[mode='comments'] [data-id].is_image [data-id] {
-    pointer-events: none !important;
-  }
-  
-  /* without a data-id or ignored */
-  
-  [data-id].ignore,body[mode='code'] *:not([data-id]) {
-    pointer-events: none !important;
-  }
-  /* disable transforms for ignored elements */
-  
-  
-  body[mode='code'] [data-id]:hover{
-    transform: none !important;
-  }
-  
-    </style><style id="hotspots-styles">
-      .hotspot {
-        position: absolute;
-        border: 1px solid #2a9fd8;
-        background: rgba(0, 173, 255, 0.54);
-        opacity: 0;
-        z-index: -1;
-        pointer-events:none;
-      }
-    </style><style>
-
+<html><head><style>
   @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-  @import url("https://fonts.googleapis.com/css?family=Inter:400,700,600");
-  
+  @import url("https://fonts.googleapis.com/css?family=Inter:700,600,400");
+
   body{
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
-  .screen textarea:focus,
-  .screen input:focus {
-    outline: none;
+  *{
+    z-index: 1;
   }
-  
-  .screen * {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-  }
-  
-  .screen div {
-    -webkit-text-size-adjust: none;
-  }
-  
-  .component-wrapper a {
-    display: contents;
-    pointer-events: auto;
-    text-decoration: none;
-  }
-  
-  .component-wrapper * {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    pointer-events: none;
-  }
-  
-  .component-wrapper a *,
-  .component-wrapper input,
-  .component-wrapper video,
-  .component-wrapper iframe {
-    pointer-events: auto;
-  }
-  
-  .component-wrapper.not-ready,
-  .component-wrapper.not-ready * {
-    visibility: hidden !important;
-  }
-  
-  .screen a {
-    display: contents;
-    text-decoration: none;
-  }
-  
-  .full-width-a {
-    width: 100%;
-  }
-  
-  .container-center-vertical {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    pointer-events: none;
-  }
-  
-  .container-center-vertical > * {
-    flex-shrink: 0;
-    pointer-events: auto;
-  }
-  
-  .container-center-horizontal {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    pointer-events: none;
-    width: 100%;
-  }
-  
-  .container-center-horizontal > * {
-    flex-shrink: 0;
-    pointer-events: auto;
-  }
-  
-  .auto-animated div {
-    --z-index: -1;
-    opacity: 0;
-    position: absolute;
-  }
-  
-  .auto-animated input {
-    --z-index: -1;
-    opacity: 0;
-    position: absolute;
-  }
-  
-  .auto-animated .container-center-vertical,
-  .auto-animated .container-center-horizontal {
-    opacity: 1;
-  }
-  
-  .overlay-base {
-    display: none;
-    height: 10%;
-    opacity: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-  
-  .overlay-base.animate-appear {
-    align-items: center;
-    animation: reveal 0.3s ease-in-out 1 normal forwards;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    opacity: 0;
-  }
-  
-  .overlay-base.animate-disappear {
-    animation: reveal 0.3s ease-in-out 1 reverse forwards;
-    display: block;
-    opacity: 1;
-    pointer-events: none;
-  }
-  
-  .overlay-base.animate-disappear * {
-    pointer-events: none;
-  }
-  
-  @keyframes reveal {
-    from { opacity: 0 }
-   to { opacity: 1 }
-  }
-  
-  .animate-nodelay {
-    animation-delay: 0s;
-  }
-  
-  .align-self-flex-start {
-    align-self: flex-start;
-  }
-  
-  .align-self-flex-end {
-    align-self: flex-end;
-  }
-  
-  .align-self-flex-center {
-    align-self: flex-center;
-  }
-  
-  .valign-text-middle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .valign-text-bottom {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-  
-  input:focus {
-    outline: none;
-  }
-  
-  .listeners-active,
-  .listeners-active * {
-    pointer-events: auto;
-  }
-  
-  .hidden,
-  .hidden * {
-    pointer-events: none;
-    visibility: hidden;
-  }
-  
-  .smart-layers-pointers,
-  .smart-layers-pointers * {
-    pointer-events: auto;
-    visibility: visible;
-  }
-  
-  .listeners-active-click,
-  .listeners-active-click * {
-    cursor: pointer;
+
+  html {
+    scroll-behavior: smooth;
   }
 
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 0.3vmax;
+    background-color:#373737;
   }
 
   ::-webkit-scrollbar-track {
@@ -247,167 +32,589 @@
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(67, 59, 119); 
   }
-  
+
+  .component-wrapper a {
+    display: contents;
+    pointer-events: auto;
+    text-decoration: none;
+  }
+
+  .screen a {
+    display: contents;
+    text-decoration: none;
+  }
+
   * {
     box-sizing: border-box;
   }
-  :root { 
+
+  :root {
     --black: #000000;
+    --eerie-black: #1d1d1d;
     --white: #ffffff;
-   
-    --font-size-l: 128px;
-    --font-size-m: 60px;
-    --font-size-s: 50px;
-   
-    --font-family-inter: "Inter", Helvetica;
+    --white-2: #ffffff1a;
+
+    --font-size-l: 25px;
+    --font-size-m: 24px;
+    --font-size-s: 20px;
+    --font-size-xl: 32px;
+    --font-size-xxl: 36px;
+    --font-size-xxxl: 48px;
+    --font-size-xxxxl: 64px;
+
+    --font-family-inter:"Inter", Helvetica;
   }
-  
-  .desktop-1 {
-    background-color: transparent;
+
+  .enoxisweb {
+    background-color: #1A1A1A;
     background-image: url("assets/bg.svg");
-    background-position: 50% 50%;
-    background-size: cover;
+    background-size: 100%;
+    background-repeat: repeat;
     position: absolute;
-    height: 100%;
+    height: 140vmax;
     width: 100%;
   }
-  
-  .desktop-1 .console-Ys8k0x {
-    left: 0vmax;
-    top: -2.3vmax;
-    width: 61vmax;
+
+  .enoxisweb .title-ALSIq1 {
+    font-size: var(--font-size-xxxl);
+    font-size: 4vmax;
+    font-weight: 700;
     height: auto;
+    left: 4.2vmax;
+    line-height: normal;
+    text-align: left;
+    top: 12vmax;
   }
-  
-  .desktop-1 .console-V3rtYt {
-    left: 50vmax;
-    top: 35vmax;
-    width: 60vmax;
-    height: auto;
-  }
-  
-  .desktop-1 .meet-a-new-utility-app-by-frost-x-Ys8k0x {
+
+  .enoxisweb .utility-description-ALSIq1 {
     background-color: transparent;
     color: var(--white);
     font-family: var(--font-family-inter);
-    font-size: 4vmax;
+    font-size: 2vmax;
     font-style: normal;
     font-weight: 400;
-    height: 12vmax;
-    letter-spacing: 0.00px;
-    line-height: normal;
-    position: relative;
-    text-align: center;
-    top: 11vmax;
+    height: auto;
+    left: 4.2vmax;
+    line-height: 2vmax;
+    position: absolute;
+    text-align: left;
+    top: 17vmax;
     width: auto;
   }
-  
-  .desktop-1 .title-Ys8k0x {
+
+  .enoxisweb .download-button-ALSIq1 {
+    background-color: var(--eerie-black);
+    border: 0.01vmax solid;
+    border-color: var(--white-2);
+    border-radius: 0.8vmax;
+    height: 6vmax;
+    left: 4.2vmax;
+    position: absolute;
+    top: 33vmax;
+    width: 18vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .enoxisweb .download-9qRayt {
     background-color: transparent;
     color: var(--white);
     font-family: var(--font-family-inter);
-    font-size: 9vmax;
+    font-size: 2vmax;
+    font-weight: 600;
+  }
+
+  .enoxisweb .version-text-ALSIq1 {
+    background-color: transparent;
+    left: 4.2vmax;
+    position: absolute;
+    top: 32vmax;
+    font-family: var(--font-family-inter);
+    font-size: 1vmax;
+    color: var(--white-2);
+  }
+
+  .enoxisweb .learn-button-ALSIq1 {
+    background-color: #1f1c26;
+    border: 0.01vmax solid;
+    border-color: var(--white-2);
+    border-radius: 0.8vmax;
+    height: 6vmax;
+    left: 25vmax;
+    position: absolute;
+    top: 33vmax;
+    width: 13.8vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .enoxisweb .learn-CYHEhe {
+    background-color: transparent;
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: 2vmax;
     font-style: normal;
-    font-weight: 700;
-    height: 10vmax;
-    letter-spacing: 0.00px;
-    line-height: normal;
-    position: relative;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .enoxisweb .showcase-video-ALSIq1 {
+    border: 0.01vmax solid;
+    border-color: var(--white-2);
+    border-radius: 0.8vmax;
+    height: 27vmax;
+    right: 4.2vmax;
+    object-fit: cover;
+    position: absolute;
+    top: 12vmax;
+    width: 40.5vmax;
+  }
+
+  .enoxisweb .learn-section {
+    background-color: var(--eerie-black);
+    border: 0.01vmax solid;
+    border-color: var(--white-2);
+    border-radius: 0.8vmax;
+    height: 40vmax;
+    left: 4.2vmax;
+    right: 4.2vmax;
+    position: absolute;
+    top: 54vmax;
+  }
+
+  .enoxisweb .title-ddF9wF {
+    font-size: 4vmax;
+    font-weight: 600;
+    left: 43%;
+    top: 2.8vmax;
+  }
+
+  .enoxisweb .enoxis-is-an-utility-ddF9wF {
+    background-color: transparent;
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: 1.6vmax;
+    font-weight: 400;
+    line-height: 1.8vmax;
+    position: absolute;
+    margin: 0 15%;
     text-align: center;
-    top: 9vmax;
+    top: 14vmax;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 11;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .enoxisweb .community-ALSIq1 {
+    background-color: var(--eerie-black);
+    border: 0.01vmax solid;
+    border-color: var(--white-2);
+    border-radius: 0.8vmax;
+    height: 22vmax;
+    left: 4.2vmax;
+    right: 4.2vmax;
+    position: absolute;
+    top: 95vmax;
+  }
+
+  .enoxisweb .join-our-russian-community-ybhxUV {
+    font-family: var(--font-family-inter);
+    font-size: 3vmax;
+    font-style: normal;
+    font-weight: 600;
+    color:white;
+    left: 27%;
+    top: 2.8vmax;
+    position: absolute;
     width: auto;
   }
-  
-  .desktop-1 .download_button-Ys8k0x {
-    place-items: center;
-    display: grid;
-    background-color: #1a1a1a;
-    border: 2px solid;
-    border-color: #ffffff1a;
-    border-radius: 20px;
-    cursor: pointer;
-    height: 8vmax;
-    text-align: center;
-    pointer-events: auto;
-    position: relative;
-    align-items: center;
-    align-content: center;
-    transform: translate(-50%, 0); 
-    width: 33vmax;
-    top: 25%;
-    left: 50%;
-    transition: 250ms;
-  }
-  
-  .desktop-1 .download_button-Ys8k0x:hover {
-    box-shadow: 0px 0px 50px 2px rgba(255,255,255,0.2);
-    transition: 250ms;
-  }
-  .desktop-1  .download_button-Ys8k0x:active{
-    background-color: rgba(255,255,255,0);
-    box-shadow: 0px 0px 50px 2px rgba(59, 255, 59, 0.5);
-    color: rgba(59, 255, 59, 0.1);
-    transition: 500ms;
-  }
-  .desktop-1  .download_button-Ys8k0x:active .text-Er09Bm{
-    color: rgb(113, 190, 113);
-    transition: 300ms;
-  }
-  
-  .desktop-1 .text-Er09Bm {
+
+  .enoxisweb .discord-link {
     background-color: transparent;
-    user-select: none;
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: 1.6vmax;
+    font-weight: 400;
+    line-height: 1.8vmax;
+    position: relative;
+    text-align: center;
+    top:14vmax;
+  }
+
+  .enoxisweb .footer-ALSIq1 {
+    background-color: #181818;
+    height: 20vmax;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .enoxisweb .frostxis-adev-l1x9DR {
+    background-color: transparent;
     color: var(--white);
     font-family: var(--font-family-inter);
     font-size: 3vmax;
     font-style: normal;
     font-weight: 600;
-    width: 100%;
-    letter-spacing: 0.00px;
+    height: auto;
+    left: 8vmax;
     line-height: normal;
-    text-align: center;
-    width: 100%;
-    transition: 300ms;
-  }
-  
-  .desktop-1 .console {
-    background-color: transparent;
-    object-fit: cover;
     position: absolute;
+    text-align: left;
+    top: 2vmax;
+    width: auto;
   }
-  </style>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <title>🐱‍💻 Enoxis by FrostX</title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <link rel="manifest" href="favicons/site.webmanifest">
-    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
+  .enoxisweb .developer-l1x9DR {
+    background-color: transparent;
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: 2vmax;
+    font-style: normal;
+    font-weight: 400;
+    height: auto;
+    left: 8vmax;
+    position: absolute;
+    text-align: left;
+    top: 5vmax;
+    width: auto;
+  }
+
+  .enoxisweb .git-hub-l1x9DR {
+    background-color: transparent;
+    right: 8vmax;
+    position: absolute;
+    top: 2vmax;
+    width: 12vmax;
+    display: flex;
+  }
+
+  .enoxisweb .logo-xPVd2O {
+    height: 5vmax;
+    width: 5vmax;
+  }
+
+  .enoxisweb .name-xPVd2O {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1000px;
+    bottom: 40%;
+  }
+
+  .enoxisweb .discord-l1x9DR {
+    background-color: transparent;
+    right: 7.4vmax;
+    position: absolute;
+    top: 8vmax;
+    width: 12vmax;
+    display: flex;
+  }
+
+  .enoxisweb .logo-qNpJd4 {
+    height: 3.8vmax;
+    width: 3.8vmax;
+  }
+
+  .enoxisweb .name-qNpJd4 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1000px;
+    bottom: 40%;
+    left:0.51vmax;
+  }
+
+  .enoxisweb .divider {
+    background-color: transparent;
+    position: absolute;
+    object-fit: cover;
+    height: 0.1vmax;
+    width: 80vmax;
+    top: 10vmax; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .enoxisweb .name {
+    background-color: transparent;
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: 1vmax;
+    font-style: normal;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  .enoxisweb .title {
+    background-color: transparent;
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-style: normal;
+    display:flex;
+    position: absolute;
+    width: auto;
+  }
+
+  .loading {
+    position: fixed;
+    background-color: #000000; 
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    text-align: center;
+  }
+  .loading p {
+    font-family: var(--font-family-inter);
+    font-style: normal;
+    font-size: 5vmax;
+    color: #ffffff;
+    position: relative;
+    padding: 25vmax 0;
+    z-index: 100;
+    transition: 1s;
+  }
+
+  .block-view {
+    display: none;
+    position: fixed;
+    background-color: #000000; 
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    text-align: center;
+  }
+  .block-view p {
+    font-family: var(--font-family-inter);
+    font-style: normal;
+    font-size: 8vmax;
+    color: #ffffff;
+    z-index: 100;
+    position: relative;
+    padding: 20vmax 0;
+  }
+  .showcasevid-tip {
+    font-family: var(--font-family-inter);
+    font-style: normal;
+    position: relative;
+    color:white;
+    background-color: transparent;
+    font-size: 0.8vmax;
+    font-weight: 700;
+    position: absolute;
+    right: 35.2vmax;
+    top: 11.1vmax;
+    z-index: 1;
+    opacity: 0.4;
+  }
+  .generated-text{
+    position: relative;
+    font-family: var(--font-family-inter);
+    font-size: 1vmax;
+    color: var(--white-2);
+    -webkit-text-stroke: 0.005vmax white;
+    left:18vmax;
+    top:14.35vmax;
+    width: auto;
+
+    z-index: 0;
+    transition: 1000ms;
+  }
+</style>
+
+<meta content="🐱‍💻 Enoxis" property="og:title" />
+<meta content="An utility app made by FrostX" property="og:description" />
+<meta content="#382BF0" data-react-helmet="true" name="theme-color" />
+
+</head>
+<body style="margin: 0;">
+    <script type="text/javascript" src="assets/libraries/jquery-3.7.1.min.js"></script>
     
-    <meta content="🐱‍💻 Enoxis" property="og:title" />
-    <meta content="An utility app made by FrostX" property="og:description" />
-    <meta content="#382BF0" data-react-helmet="true" name="theme-color" />
-  </head>
-  <body style="margin: 0;">
-     <input type="hidden" id="anPageName" name="page" value="desktop-1">
-     <div class="container-center-horizontal">
-        <div class="desktop-1 screen " data-id="1:2">
-            <img class="console-Ys8k0x console" data-id="1:7" src="assets/console-transparent.png" alt="Console">
-            <img class="console-V3rtYt console" data-id="1:7" src="assets/console-transparent.png" alt="Console">
-           <p class="meet-a-new-utility-app-by-frost-x-Ys8k0x valign-text-middle" data-id="2:10">Meet a new utility app<br>by FrostX...</p>
-           <h1 class="title-Ys8k0x valign-text-middle" data-id="2:11">Enoxis</h1>
-           <a href="downloads/enoxis-boostsrapper.exe" download="boostsrapper.exe">
-           <div class="download_button-Ys8k0x smart-layers-pointers" data-id="2:12">
-            <nobr>
-                <div class="text-Er09Bm valign-text-middle" data-id="2:13">
-                    Download Beta
-                </div>
-            </nobr>
-           </div>
-           </a>
+    <script type="text/javascript"> // resolution checker
+      document.addEventListener("DOMContentLoaded", function(event) {
+        var startwidth = window.innerWidth;
+        var startBlockView = document.getElementsByClassName("block-view")[0]
+
+        console.log(`started resolution check: ${startwidth}`);
+
+        if (startwidth < 750) {
+          startBlockView.style.display = "block";
+        } else {
+          startBlockView.style.display = "none";
+        }
+
+        window.onresize =  function() {
+          var width = window.innerWidth;
+          var blockView = document.getElementsByClassName("block-view")[0]
+
+          if (width < 750) {
+            blockView.style.display = "block";
+          } else {
+            blockView.style.display = "none";
+          }
+        }
+      });
+    </script>
+
+    <script>
+      // / settings /
+      var textLength = 3;
+      var makeLonger = true;
+      var spacingMaxSetting = 5;
+      var hoveredOver = false;
+      var hoverText = "beta version";
+      // / settings /
+
+      function randomRange(min, max) {
+        let cal = (Math.random() * (max - min) + min);
+        return parseFloat(cal);
+       }
+
+      function makeid(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+          counter += 1;
+        }
+        return result;
+      }
+
+      function changeText(element) {
+        if (!hoveredOver) {
+          element.innerHTML = makeid(textLength);
+        }
+      }
+
+      function changeSpacing(element) {
+        if (!hoveredOver) {
+          var maxInRange = spacingMaxSetting/textLength;
+          element.style.letterSpacing = `${randomRange(0.1, maxInRange)}vmax`;
+        }
+      }
+
+      function changeLength() {
+        if (!hoveredOver) {
+          if (textLength != 15 && makeLonger == true) {
+            textLength += 1
+            if (textLength == 15) {
+              makeLonger = false;
+            }
+          } else if (makeLonger == false && textLength != 3) {
+            textLength -= 1
+            if (textLength == 3) {
+              makeLonger = true;
+            }
+          }
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function(event) {
+        console.log("LOADED!")
+        var loadingDiv = document.getElementsByClassName("loading")[0] // get loading div
+        $(".loading").fadeOut( "slow", function() {
+          loadingDiv.style.display = 'none'; // hide loading div
+        });
+
+        var versionText = document.getElementsByClassName("version-text-ALSIq1")[0]
+
+        fetch("version.txt")
+        .then((res) => res.text())
+        .then((text) => {
+          versionText.innerHTML = text;
+        })
+
+        const test = document.createElement("p")
+        test.classList.add('generated-text');
+        test.innerHTML = makeid(15);
+        const main = document.getElementById("enoxisweb")
+        main.appendChild(test);
+
+        var changeTextInterval = setInterval(function(){changeText(test)}, 20);
+        setInterval(changeLength, 1000);
+        setInterval(function(){changeSpacing(test)}, 1000);
+
+        test.addEventListener(
+          "mouseenter",
+          (event) => {
+            hoveredOver = true;
+            event.target.innerHTML = hoverText;
+            event.target.style.transition = "none";
+            event.target.style.letterSpacing = "2vmax";
+          },
+          false,
+        );
+        test.addEventListener(
+          "mouseleave",
+          (event) => {
+            hoveredOver = false;
+            event.target.innerHTML = makeid(15);
+            event.target.style.letterSpacing = "0px";
+            event.target.style.transition = "1000ms";
+          },
+          false,
+        );
+      });
+    </script>
+    <p class="showcasevid-tip">press f for fullscreen...</p>
+    <div class="loading"><p>Enoxis Web V2 is loading...</p></div>
+    <div class="block-view"><p>Resolution not supported<br>:(</p></div>
+    <div class="container-center-horizontal">
+        <div class="enoxisweb screen" id="enoxisweb">
+            <div class="title-ALSIq1 title">Enoxis</div>
+            <p class="utility-description-ALSIq1">The way you imagined <br>social media cheats is now<br>here.</p>
+            <a href="downloads/enoxis-bootstrapper.exe" download="bootstrapper.exe">
+            <div class="download-button-ALSIq1">
+                <div class="download-9qRayt">Download</div>
+            </div><p class="version-text-ALSIq1">fetching version...</p></a>
+            <a href="#learn">
+            <div class="learn-button-ALSIq1">
+                <div class="learn-CYHEhe">Learn</div>
+            </div></a>
+            <iframe class="showcase-video-ALSIq1" src="https://www.youtube.com/embed/E74PDz5U5sE?controls=0&frameborder=0" allowfullscreen></iframe>
+            <div class="learn-section" id="learn">
+                <h1 class="title-ddF9wF title">Learn</h1><img
+                    class="divider" 
+                    src="assets/divider.svg">
+                <p class="enoxis-is-an-utility-ddF9wF">Enoxis is an utility tool,
+                    <br>used to modify your account on social media called “VKontakte”.<br> It is used by developers and
+                    simply users who wants to make their account pretty,<br>or make custom commands and workflows,<br>the
+                    console interface is not hard, and the tool is lightweight.<br>(only 30mb without any additional
+                    installations)<br><br>By clicking the download button above,<br> you install the bootstrapper,<br>
+                    which will always install the latest version of enoxis,<br> and no need to install it again.</p>
+            </div>
+            <div class="community-ALSIq1">
+                <div class="join-our-russian-community-ybhxUV title">Join our russian community</div>
+                <img class="divider" src="assets/divider.svg">
+                <a href="discord"  target="_blank">
+                  <div class="discord-link">https://frostx.is-a.dev/enoxis/discord</div>
+                </a>
+            </div>
+            <footer class="footer-ALSIq1">
+                <div class="frostxis-adev-l1x9DR">frostx.is-a.dev</div>
+                <div class="developer-l1x9DR">developer</div>
+                <a href="https://github.com/frostx-official" target="_blank">
+                <div class="git-hub-l1x9DR"><img class="logo-xPVd2O logo" 
+                        src="assets/github.png">
+                    <div class="name-xPVd2O name">frostx-official</div>
+                </div></a>
+                <a href="https://discordlookup.com/user/908779319084589067" target="_blank">
+                <div class="discord-l1x9DR"><img class="logo-qNpJd4 logo" 
+                        src="assets/discord.png">
+                    <div class="name-qNpJd4  name">frostx_gg</div>
+                </div></a>
+            </footer>
         </div>
-     </div>
-  </body>
+    </div>
+</body>
+</html>
